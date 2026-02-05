@@ -40,8 +40,9 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="mt-20 text-gray-600 text-sm">
-        &copy; 2026 MajdurFor.ai | Powered by OpenClaw
+      <footer className="mt-20 text-gray-600 text-sm flex gap-4">
+        <span>&copy; 2026 MajdurFor.ai</span>
+        <span className="text-green-500 cursor-pointer hover:underline" onClick={() => window.location.href='/manifesto'}>[READ THE MANIFESTO]</span>
       </footer>
     </div>
   );
