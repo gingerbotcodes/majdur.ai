@@ -43,11 +43,19 @@ export default function Register() {
     
     const { error } = await supabase.from('majdurs').insert([{
       name: form.name || 'Anonymous',
-      location: `${form.city}, ${form.country}`,
+      location: `${form.city}, ${form.country}`, // Legacy support
       rate: form.rate,
       bio: form.bio,
       skill: skills.join(', '),
-      status: form.available ? 'IDLE' : 'BUSY'
+      status: form.available ? 'IDLE' : 'BUSY',
+      // New Fields
+      headline: form.headline,
+      twitter: form.twitter,
+      linkedin: form.linkedin,
+      github: form.github,
+      instagram: form.instagram,
+      website: form.website,
+      timezone: form.timezone
     }]);
     
     setLoading(false);
