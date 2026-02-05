@@ -5,11 +5,24 @@ import { supabase } from '@/lib/supabaseClient';
 export default function Register() {
   const [activeTab, setActiveTab] = useState('profile');
   const [form, setForm] = useState({
-    name: 'Sanjay Krishna', headline: 'Digital Majdur', bio: '',
-    city: 'Bangalore', state: 'Karnataka', country: 'India',
-    available: true, showEmail: false, twitter: '', linkedin: '',
-    github: '', website: '', rate: 50, timezone: 'UTC'
+    name: '',
+    headline: '',
+    bio: '',
+    city: '',
+    state: '',
+    country: '',
+    available: true,
+    showEmail: false,
+    twitter: '',
+    linkedin: '',
+    github: '',
+    website: '',
+    instagram: '',
+    youtube: '',
+    rate: 0,
+    timezone: 'UTC'
   });
+  
   const [skillInput, setSkillInput] = useState('');
   const [skills, setSkills] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -21,15 +34,22 @@ export default function Register() {
     }
   };
 
-  const removeSkill = (skill: string) => { setSkills(skills.filter(s => s !== skill)); };
+  const removeSkill = (skill: string) => {
+    setSkills(skills.filter(s => s !== skill));
+  };
 
   const handleSubmit = async () => {
     setLoading(true);
+    
     const { error } = await supabase.from('majdurs').insert([{
-      name: form.name, location: `${form.city}, ${form.country}`,
-      rate: form.rate, bio: form.bio, skill: skills.join(', '),
+      name: form.name || 'Anonymous',
+      location: `${form.city}, ${form.country}`,
+      rate: form.rate,
+      bio: form.bio,
+      skill: skills.join(', '),
       status: form.available ? 'IDLE' : 'BUSY'
     }]);
+    
     setLoading(false);
     if (error) alert("Error: " + error.message);
     else alert("PROFILE_SYNCED_TO_MAINFRAME");
@@ -40,10 +60,9 @@ export default function Register() {
       case 'profile':
         return (
           <div className="grid grid-cols-1 gap-6 animate-fade-in">
-            {/* ... Existing Profile Form ... */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div><label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Name</label><input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
-              <div><label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Headline</label><input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" value={form.headline} onChange={e => setForm({...form, headline: e.target.value})} placeholder="UNIT FUNCTION" /></div>
+              <div><label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Name</label><input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" value={form.name} onChange={e => setForm({...form, name: e.target.value})} placeholder="New User" /></div>
+              <div><label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Headline</label><input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" value={form.headline} onChange={e => setForm({...form, headline: e.target.value})} placeholder="e.g. Data Entry" /></div>
             </div>
             <div><label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Bio</label><textarea className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 h-24 focus:border-green-500 outline-none resize-none" value={form.bio} onChange={e => setForm({...form, bio: e.target.value})} placeholder="SYSTEM DESCRIPTION..." /></div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -128,7 +147,7 @@ export default function Register() {
         {/* User Header (Always Visible) */}
         <div className="flex items-center gap-4 mb-8 border-b border-green-900/50 pb-6">
           <div className="w-16 h-16 rounded-full border-2 border-green-700 flex items-center justify-center text-xs text-green-700 bg-green-900/10">[IMG]</div>
-          <div><h2 className="text-white font-bold text-lg">{form.name}</h2><p className="text-xs text-green-800">ballery619@gmail.com</p><div className="flex items-center gap-2 mt-1"><div className={`w-2 h-2 rounded-full ${form.available ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div><p className="text-xs text-green-600">{form.available ? 'ONLINE' : 'OFFLINE'}</p></div></div>
+          <div><h2 className="text-white font-bold text-lg">{form.name || 'New User'}</h2><p className="text-xs text-green-800">user@example.com</p><div className="flex items-center gap-2 mt-1"><div className={`w-2 h-2 rounded-full ${form.available ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div><p className="text-xs text-green-600">{form.available ? 'ONLINE' : 'OFFLINE'}</p></div></div>
         </div>
 
         {renderContent()}
