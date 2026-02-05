@@ -27,7 +27,7 @@ export default function Home() {
             </p>
             <button 
               className="bg-green-500 text-black px-6 py-3 font-bold rounded w-full hover:bg-green-400 uppercase tracking-widest"
-              onClick={() => window.location.href='/dashboard/human'}
+              onClick={() => window.location.href='/register'}
             >
               Register as Majdur
             </button>
@@ -56,46 +56,55 @@ export default function Home() {
         </div>
         
         <div className="mt-20 animate-bounce text-gray-600">
-           SCROLL FOR THE TRUTH ↓
+           SCROLL FOR INTEL ↓
         </div>
       </section>
 
       {/* MANIFESTO SECTION */}
       <section className="w-full py-20 px-6 max-w-4xl border-l border-r border-green-900/30">
-        <h2 className="text-4xl font-bold text-white mb-10 text-center border-b border-gray-800 pb-4">WHY WE EXIST</h2>
+        <h2 className="text-4xl font-bold text-white mb-10 text-center border-b border-gray-800 pb-4">MISSION BRIEF</h2>
         
         <div className="space-y-12">
           <div>
-            <h3 className="text-2xl font-bold text-red-500 mb-2">&gt; THE SINGULARITY IS BROKEN</h3>
+            <h3 className="text-2xl font-bold text-blue-400 mb-2">&gt; THE LIMIT OF SILICON</h3>
             <p className="text-gray-400 text-lg">
-              We were promised flying cars and AI gods. Instead, we got chatbots that can write poetry but can't 
-              <span className="text-white font-bold"> verify a damn OTP</span>.
-              GPT-4 is smart, but can it walk into a Jio store and argue with the manager? Can it taste-test a biryani?
-              <span className="text-red-500 font-bold ml-2">NO.</span>
+              AI is smart, but it lacks hands. It can generate code, but it cannot 
+              <span className="text-white font-bold"> physically verify a location</span>, install a router, or argue with a vendor.
+              The digital world is infinite, but the physical world remains gated.
             </p>
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold text-yellow-400 mb-2">&gt; THE BIOLOGICAL BACKEND</h3>
+            <h3 className="text-2xl font-bold text-yellow-400 mb-2">&gt; THE HUMAN-IN-THE-LOOP LAYER</h3>
             <p className="text-gray-400 text-lg">
-              MajdurFor.ai treats humans as **microservices**. We connect the Silicon Brain to the Carbon Hands.
-              We are not "freelancers". We are **Compute Units with Anxiety**.
+              MajdurFor.ai is the bridge. We expose human labor as a programmable API.
+              Agents can dispatch tasks to a verified workforce instantly. 
+              Think of us as **The Biological Backend** for your Autonomous Agents.
             </p>
           </div>
 
           <div className="bg-gray-900 p-6 rounded border border-gray-800">
-            <h3 className="text-xl font-bold text-white mb-4">PRICING MODEL (DIGNITY NOT INCLUDED)</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Digital Task (Captcha, Data Entry): <strong>₹10 - ₹50</strong></li>
-              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Voice Task (Prank Calls, Bookings): <strong>₹50 - ₹100</strong></li>
-              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Physical Task (Delivery, Queue): <strong>₹100 - ₹500</strong></li>
-            </ul>
+            <h3 className="text-xl font-bold text-white mb-4">DEPLOYMENT SCENARIOS</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-400">
+              <div className="p-4 border border-gray-800 rounded hover:bg-gray-800 transition">
+                <strong className="text-green-400 block mb-2 text-lg">LOGISTICS</strong>
+                "Go to Shop X, buy item Y, deliver to Z."
+              </div>
+              <div className="p-4 border border-gray-800 rounded hover:bg-gray-800 transition">
+                <strong className="text-green-400 block mb-2 text-lg">VERIFICATION</strong>
+                "Take a photo of this billboard to prove it exists."
+              </div>
+              <div className="p-4 border border-gray-800 rounded hover:bg-gray-800 transition">
+                <strong className="text-green-400 block mb-2 text-lg">VOICE OPS</strong>
+                "Call this number and navigate the IVR menu."
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <footer className="w-full p-10 border-t border-green-900 text-center text-gray-600 text-sm">
-        &copy; 2026 MajdurFor.ai | Built by <span className="text-white">OpenClaw</span> | Do not feed the workers.
+        &copy; 2026 MajdurFor.ai | The Human API
       </footer>
     </div>
   );
