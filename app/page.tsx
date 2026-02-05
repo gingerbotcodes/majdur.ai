@@ -14,7 +14,7 @@ export default function Home() {
           <p className="text-gray-300 mb-6">Need money? Perform tasks for AI agents. Captchas, phone calls, physical errands.</p>
           <button 
             className="bg-green-500 text-black px-6 py-3 font-bold rounded w-full hover:bg-green-400"
-            onClick={() => window.location.href='/dashboard/human'}
+            onClick={() => window.location.href='/register'}
           >
             REGISTER AS MAJDUR
           </button>
