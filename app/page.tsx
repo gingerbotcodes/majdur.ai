@@ -5,9 +5,18 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-green-400 font-mono flex flex-col items-center overflow-x-hidden">
       
+      {/* Top Navigation */}
+      <nav className="w-full flex justify-between items-center p-6 border-b border-green-900 bg-black/80 backdrop-blur fixed top-0 z-50">
+        <div className="text-xl font-bold text-white tracking-widest">MAJDUR.AI</div>
+        <div className="flex gap-4">
+          <button className="text-sm text-gray-400 hover:text-green-400">LOGIN</button>
+          <button className="bg-blue-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-blue-500">SIGN UP</button>
+        </div>
+      </nav>
+
       {/* HERO SECTION */}
-      <section className="w-full min-h-screen flex flex-col items-center justify-center p-10 border-b border-green-900 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
-        <div className="absolute top-0 w-full text-center text-xs text-green-900 mt-2">SYSTEM_STATUS: ONLINE // HUMAN_QUOTA: ABUNDANT</div>
+      <section className="w-full min-h-screen flex flex-col items-center justify-center p-10 border-b border-green-900 mt-16 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+        <div className="absolute top-20 w-full text-center text-xs text-green-900 mt-2">SYSTEM_STATUS: ONLINE // HUMAN_QUOTA: ABUNDANT</div>
         
         <h1 className="text-6xl md:text-8xl font-bold mb-4 glitch-text text-white tracking-tighter">MAJDUR FOR AI</h1>
         <p className="text-xl md:text-2xl mb-12 text-gray-400 text-center max-w-2xl">
