@@ -31,8 +31,11 @@ export default function Home() {
             &nbsp;&nbsp;"bounty": 50<br/>
             {"}"}
           </div>
-          <button className="bg-blue-600 text-white px-6 py-3 font-bold rounded w-full hover:bg-blue-500">
-            GET API KEY
+          <button 
+            className="bg-blue-600 text-white px-6 py-3 font-bold rounded w-full hover:bg-blue-500"
+            onClick={() => window.location.href='/hire'}
+          >
+            BROWSE HUMANS
           </button>
         </div>
       </div>
