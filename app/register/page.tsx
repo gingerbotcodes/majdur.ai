@@ -40,7 +40,6 @@ export default function Register() {
   const handleSubmit = async () => {
     setLoading(true);
     
-    // Construct the payload to match existing DB schema (simplified)
     const { error } = await supabase.from('majdurs').insert([{
       name: form.name,
       location: `${form.city}, ${form.country}`,
@@ -56,39 +55,46 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans p-4">
+    <div className="min-h-screen bg-black text-green-500 font-mono p-4 md:p-10">
       {/* Top Bar */}
-      <div className="flex justify-between items-center mb-6 max-w-4xl mx-auto">
+      <div className="flex justify-between items-center mb-6 max-w-4xl mx-auto border-b border-green-900 pb-4">
         <div>
-          <h1 className="text-xl font-bold text-white">dashboard</h1>
-          <p className="text-xs text-gray-500">manage your stuff</p>
+          <h1 className="text-xl font-bold tracking-widest text-white">DASHBOARD // V1</h1>
+          <p className="text-xs text-green-700">MANAGE_YOUR_ASSETS</p>
         </div>
         <button 
           onClick={handleSubmit}
-          className="bg-orange-500 text-black font-bold px-6 py-2 rounded text-sm hover:bg-orange-400 transition"
+          className="bg-green-600 text-black font-bold px-6 py-2 rounded-sm text-sm hover:bg-green-500 transition shadow-[0_0_10px_rgba(0,255,0,0.3)]"
         >
-          {loading ? "saving..." : "save"}
+          {loading ? "SAVING..." : "SAVE_CONFIG"}
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="max-w-4xl mx-auto mb-6 bg-[#111] rounded-lg p-1 flex justify-between border border-gray-800">
-        <button className="flex-1 py-2 rounded bg-orange-500 text-black font-bold text-sm">profile</button>
-        <button className="flex-1 py-2 text-gray-500 text-sm hover:text-white">photos</button>
-        <button className="flex-1 py-2 text-gray-500 text-sm hover:text-white">payments</button>
-        <button className="flex-1 py-2 text-gray-500 text-sm hover:text-white">messages</button>
+      <div className="max-w-4xl mx-auto mb-6 flex border border-green-800 rounded-sm overflow-hidden">
+        <button className="flex-1 py-2 bg-green-900/30 text-green-400 font-bold text-sm border-r border-green-800 hover:bg-green-900/50">PROFILE</button>
+        <button className="flex-1 py-2 text-green-800 text-sm border-r border-green-800 hover:text-green-500 hover:bg-green-900/10">PHOTOS</button>
+        <button className="flex-1 py-2 text-green-800 text-sm border-r border-green-800 hover:text-green-500 hover:bg-green-900/10">PAYMENTS</button>
+        <button className="flex-1 py-2 text-green-800 text-sm hover:text-green-500 hover:bg-green-900/10">MESSAGES</button>
       </div>
 
       {/* Main Form Card */}
-      <div className="max-w-4xl mx-auto bg-[#111] border border-gray-800 rounded-lg p-6">
-        
+      <div className="max-w-4xl mx-auto border border-green-800 bg-black/50 rounded-sm p-6 relative">
+        <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-green-500"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-green-500"></div>
+
         {/* User Info Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-500 border border-gray-700 cursor-pointer hover:border-gray-500">add</div>
+        <div className="flex items-center gap-4 mb-8 border-b border-green-900/50 pb-6">
+          <div className="w-16 h-16 rounded-full border-2 border-green-700 flex items-center justify-center text-xs text-green-700 hover:border-green-400 hover:text-green-400 cursor-pointer bg-green-900/10">
+            [IMG]
+          </div>
           <div>
-            <h2 className="text-white font-bold">{form.name || 'Your Name'}</h2>
-            <p className="text-xs text-gray-500">ballery619@gmail.com</p>
-            <p className="text-xs text-green-500 mt-1">{form.available ? 'available' : 'unavailable'}</p>
+            <h2 className="text-white font-bold text-lg">{form.name || 'UNKNOWN_UNIT'}</h2>
+            <p className="text-xs text-green-800">ballery619@gmail.com</p>
+            <div className="flex items-center gap-2 mt-1">
+              <div className={`w-2 h-2 rounded-full ${form.available ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+              <p className="text-xs text-green-600">{form.available ? 'ONLINE' : 'OFFLINE'}</p>
+            </div>
           </div>
         </div>
 
@@ -98,82 +104,70 @@ export default function Register() {
           {/* Name & Headline */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">name</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Name</label>
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 focus:shadow-[0_0_5px_rgba(0,255,0,0.2)] outline-none transition-colors" 
                 value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">headline</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
-                value={form.headline} onChange={e => setForm({...form, headline: e.target.value})} placeholder="what you do" />
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Headline</label>
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 focus:shadow-[0_0_5px_rgba(0,255,0,0.2)] outline-none transition-colors" 
+                value={form.headline} onChange={e => setForm({...form, headline: e.target.value})} placeholder="UNIT FUNCTION" />
             </div>
           </div>
 
           {/* Bio */}
           <div>
             <div className="flex justify-between">
-              <label className="block text-xs text-gray-500 mb-1">bio</label>
-              <span className="text-xs text-gray-600">{form.bio.length}/2000</span>
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Bio</label>
+              <span className="text-xs text-green-900">{form.bio.length}/2000</span>
             </div>
-            <textarea className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white h-24 focus:border-orange-500 outline-none resize-none" 
-              value={form.bio} onChange={e => setForm({...form, bio: e.target.value})} />
+            <textarea className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 h-24 focus:border-green-500 outline-none resize-none" 
+              value={form.bio} onChange={e => setForm({...form, bio: e.target.value})} placeholder="SYSTEM DESCRIPTION..." />
           </div>
 
           {/* Location */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">city</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">City</label>
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" 
                 value={form.city} onChange={e => setForm({...form, city: e.target.value})} />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">state</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">State</label>
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" 
                 value={form.state} onChange={e => setForm({...form, state: e.target.value})} />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">country</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
+              <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Country</label>
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" 
                 value={form.country} onChange={e => setForm({...form, country: e.target.value})} />
             </div>
           </div>
 
           {/* Toggles */}
-          <div className="bg-[#1a1a1a] p-3 rounded border border-gray-800 flex justify-between items-center">
+          <div className="border border-green-900 p-4 rounded-sm flex justify-between items-center bg-green-900/5">
             <div>
-              <span className="block text-sm text-white font-bold">available</span>
-              <span className="text-xs text-gray-500">accepting bookings?</span>
+              <span className="block text-sm text-green-400 font-bold uppercase">Availability</span>
+              <span className="text-xs text-green-800">ACCEPTING_TASKS?</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" className="sr-only peer" checked={form.available} onChange={e => setForm({...form, available: e.target.checked})} />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
-            </label>
-          </div>
-
-          <div className="bg-[#1a1a1a] p-3 rounded border border-gray-800 flex justify-between items-center">
-            <div>
-              <span className="block text-sm text-white font-bold">show email</span>
-              <span className="text-xs text-gray-500">display email on profile?</span>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" checked={form.showEmail} onChange={e => setForm({...form, showEmail: e.target.checked})} />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+              <div className="w-11 h-6 bg-green-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-black after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
             </label>
           </div>
 
           {/* Skills */}
           <div>
-            <label className="block text-xs text-gray-500 mb-1">skills</label>
-            <div className="flex gap-2">
-              <input className="flex-1 bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
-                value={skillInput} onChange={e => setSkillInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && addSkill()} placeholder="type a skill and press enter" />
-              <button onClick={addSkill} className="bg-[#222] border border-gray-700 text-gray-400 px-4 rounded text-xs hover:text-white">add</button>
+            <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Skills</label>
+            <div className="flex gap-2 mb-2">
+              <input className="flex-1 bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 focus:border-green-500 outline-none" 
+                value={skillInput} onChange={e => setSkillInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && addSkill()} placeholder="ADD_MODULE..." />
+              <button onClick={addSkill} className="bg-green-900/30 border border-green-700 text-green-400 px-4 rounded-sm text-xs hover:bg-green-500 hover:text-black">INJECT</button>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {skills.length === 0 && <span className="text-xs text-gray-600">no skills added yet</span>}
+            <div className="flex flex-wrap gap-2">
               {skills.map(s => (
-                <span key={s} className="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs flex items-center gap-2 border border-gray-600">
-                  {s} <button onClick={() => removeSkill(s)} className="text-red-400 hover:text-red-300">x</button>
+                <span key={s} className="bg-green-900/20 border border-green-700 text-green-400 px-2 py-1 rounded-sm text-xs flex items-center gap-2">
+                  {s} <button onClick={() => removeSkill(s)} className="text-green-700 hover:text-red-500">x</button>
                 </span>
               ))}
             </div>
@@ -181,42 +175,16 @@ export default function Register() {
 
           {/* Social Links */}
           <div>
-            <label className="block text-xs text-gray-500 mb-1">social links</label>
+            <label className="block text-xs text-green-700 mb-1 uppercase tracking-wider">Uplinks</label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-pink-500">🐦</span>
-                <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 pl-10 text-sm text-white focus:border-orange-500 outline-none" 
-                  value={form.twitter} onChange={e => setForm({...form, twitter: e.target.value})} placeholder="twitter.com/username" />
-              </div>
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-blue-500">💼</span>
-                <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 pl-10 text-sm text-white focus:border-orange-500 outline-none" 
-                  value={form.linkedin} onChange={e => setForm({...form, linkedin: e.target.value})} placeholder="linkedin.com/in/username" />
-              </div>
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-purple-500">🐙</span>
-                <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 pl-10 text-sm text-white focus:border-orange-500 outline-none" 
-                  value={form.github} onChange={e => setForm({...form, github: e.target.value})} placeholder="github.com/username" />
-              </div>
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-blue-300">🌐</span>
-                <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 pl-10 text-sm text-white focus:border-orange-500 outline-none" 
-                  value={form.website} onChange={e => setForm({...form, website: e.target.value})} placeholder="yoursite.com" />
-              </div>
-            </div>
-          </div>
-
-          {/* Rate & Timezone */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">rate ($/hr)</label>
-              <input type="number" className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
-                value={form.rate} onChange={e => setForm({...form, rate: parseInt(e.target.value)})} />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-500 mb-1">timezone</label>
-              <input className="w-full bg-[#1a1a1a] border border-gray-700 rounded p-2 text-sm text-white focus:border-orange-500 outline-none" 
-                value={form.timezone} onChange={e => setForm({...form, timezone: e.target.value})} />
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 placeholder-green-900" 
+                value={form.twitter} onChange={e => setForm({...form, twitter: e.target.value})} placeholder="TWITTER_ID" />
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 placeholder-green-900" 
+                value={form.github} onChange={e => setForm({...form, github: e.target.value})} placeholder="GITHUB_ID" />
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 placeholder-green-900" 
+                value={form.linkedin} onChange={e => setForm({...form, linkedin: e.target.value})} placeholder="LINKEDIN_ID" />
+              <input className="w-full bg-black border border-green-800 rounded-sm p-2 text-sm text-green-400 placeholder-green-900" 
+                value={form.website} onChange={e => setForm({...form, website: e.target.value})} placeholder="COM_LINK" />
             </div>
           </div>
 
