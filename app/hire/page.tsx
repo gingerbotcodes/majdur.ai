@@ -2,15 +2,27 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
+// Define Interface
+interface Worker {
+  id: string;
+  name: string;
+  location: string;
+  skill: string;
+  rate: number;
+  status: string;
+  bio: string;
+}
+
 export default function Hire() {
-  const [workers, setWorkers] = useState<any[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Only fetch on client mount
     fetchWorkers();
     
-    // Realtime subscription
     const channel = supabase.channel('majdurs')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'majdurs' }, payload => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'majdurs' }, () => {
         fetchWorkers();
       })
       .subscribe();
@@ -19,13 +31,21 @@ export default function Hire() {
   }, []);
 
   async function fetchWorkers() {
-    const { data, error } = await supabase
-      .from('majdurs')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (data) setWorkers(data);
+    try {
+      const { data } = await supabase
+        .from('majdurs')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (data) setWorkers(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   }
+
+  if (loading) return <div className="min-h-screen bg-black text-green-500 font-mono p-10">LOADING_ASSETS...</div>;
 
   return (
     <div className="min-h-screen bg-black text-green-500 font-mono p-6">
@@ -46,7 +66,7 @@ export default function Hire() {
             <h2 className="text-xl text-white font-bold mb-1">{worker.name}</h2>
             <p className="text-xs text-gray-500 mb-4 uppercase">{worker.location} // {worker.skill}</p>
             
-            <div className="text-sm text-gray-400 mb-6 h-12">
+            <div className="text-sm text-gray-400 mb-6 h-12 overflow-hidden">
               &gt; {worker.bio || "Ready for deployment."}
             </div>
 
